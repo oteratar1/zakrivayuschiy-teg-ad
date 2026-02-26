@@ -1,0 +1,431 @@
+/* Здесь вы напишете основную часть стилей страницы.
+
+Будьте внимательны! Для корректной работы скриптов на этом сайте нужно, чтобы в HTML некоторые классы были названы особым образом:
+✦ theme-dark — класс тёмной темы
+✦ theme-light — класс светлой темы
+✦ like-icon — для svg-иконки анимированного сердца
+✦ card__like-button — для кнопки Like рядом с иконкой
+✦ card__icon-button — для кнопки, оборачивающей иконку
+✦ card__icon-button — для кнопки, оборачивающей иконку
+✦ is-liked — для обозначения состояния лайкнутой иконки в виде сердца
+✦ button__text — для обозначения текстового элемента внутри кнопки
+
+Кроме этого, не меняйте HTML переключателя тем. Его разметка также гарантирует работу своего скрипта.
+
+*/
+
+.page {
+  width: calc(100vw * (700 / 1440));
+  min-width: 430px;
+  margin-top: 100px;
+  margin-bottom: 100px;
+  color: var(--themes-main-color);
+  font-family: var(--font-main);
+  background: var(--background);
+  background-position: center;
+  background-size: cover;
+  background-attachment: fixed;
+  font-variation-settings: "wght" var(--themes-font-weight-content);
+}
+
+/* Header */
+.header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 23px;
+  margin-bottom: 99px;
+  border: 2px solid var(--themes-main-color);
+  padding: clamp(7.5rem, 7.1479rem + 1.5023vw, 8.5rem) 0 25px 0;
+  font-family: var(--font-accent);
+  background-color: var(--themes-backgroud-color);
+}
+
+.header__logo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+.header__title {
+  font-size: clamp(3.0625rem, 2.7104rem + 1.5023vw, 4.0625rem);
+  text-transform: uppercase;
+}
+
+.header__title:focus {
+  outline: none;
+}
+
+.header__description {
+  font-size: clamp(0.875rem, 0.6769rem + 0.8451vw, 1.4375rem);
+  text-transform: uppercase;
+}
+
+.theme-menu__list {
+  display: flex;
+  flex-direction: column;
+  gap: 11px;
+  padding-left: 18px;
+}
+
+.theme-menu__button {
+  position: relative;
+  border: none;
+  padding: 1px 0;
+  font-size: 14px;
+  text-transform: uppercase;
+  background-color: transparent;
+  transition: opacity 0.3s ease;
+  cursor: pointer;
+}
+
+.theme-menu__button:hover {
+  opacity: 0.6;
+}
+
+.theme-menu__button::after {
+  content: "";
+  position: absolute;
+  bottom: -3px;
+  left: 0;
+  display: block;
+  width: 0%;
+  height: 2px;
+  background-color: var(--themes-main-color);
+  transition: width 0.5s ease-in-out;
+}
+
+.theme-menu__button:focus-within {
+  outline: none;
+  opacity: 0.6;
+}
+
+.theme-menu__button:focus-within::after {
+  width: 100%;
+}
+
+.theme-menu__button:disabled {
+  opacity: 0.6;
+  cursor: default;
+}
+
+.theme-menu__button:disabled::before {
+  content: "▶";
+  position: absolute;
+  top: 0;
+  left: -20px;
+  animation: choose 0.5s infinite ease-in-out alternate;
+}
+
+/* main */
+.main {
+  display: flex;
+  flex-direction: column;
+  gap: 50px;
+}
+
+/* Post */
+.post {
+  border: 2px solid var(--themes-main-color);
+  background-color: var(--themes-backgroud-color);
+}
+
+.post__title {
+  padding: 5px 10px;
+  font-size: 18px;
+  font-variation-settings: "wght" var(--themes-font-weight-title);
+}
+
+.post__cover {
+  position: relative;
+  border-top: 2px solid var(--themes-main-color);
+  border-bottom: 2px solid var(--themes-main-color);
+}
+
+.post__cover__image {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  aspect-ratio: 1 / 1;
+}
+
+.post__cover__watermark {
+  position: absolute;
+  top: 25px;
+  right: 25px;
+  opacity: 0.5;
+  color: var(--themes-main-color);
+  font-family: var(--font-accent);
+  font-weight: 400;
+  font-size: 14px;
+  text-shadow: 0 0 1px var(--themes-backgroud-color);
+}
+
+@supports (
+  (
+      (text-stroke: 1px var(--themes-backgroud-color)) or
+        (-webkit-text-stroke: 1px var(--themes-backgroud-color))
+    )
+    and (mix-blend-mode: hard-light)
+) {
+  .post__cover__watermark {
+    text-shadow: none;
+    -webkit-text-stroke: 1px var(--themes-backgroud-color);
+    text-stroke: 1px var(--themes-backgroud-color);
+    mix-blend-mode: hard-light;
+  }
+}
+
+.post__content {
+  display: flex;
+  flex-direction: column;
+  gap: 26px;
+  padding: 25px;
+  padding-bottom: 22px;
+  font-size: 18px;
+  line-height: 21px;
+  font-variation-settings: "wght" var(--themes-font-weight-content);
+}
+
+.post__buttons {
+  display: flex;
+  justify-content: end;
+  gap: 7px;
+  padding-bottom: 3px;
+}
+
+/* footer */
+.main__footer {
+  display: flex;
+  justify-content: center;
+}
+
+/* utils */
+
+.card__icon-button {
+  position: relative;
+  display: flex;
+  align-items: end;
+  min-height: 38px;
+  border: none;
+  padding: 0;
+  background-color: transparent;
+  cursor: pointer;
+  z-index: 1;
+}
+
+.card__icon-button:focus {
+  outline: none;
+}
+
+.card__icon-button::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  outline: 2px solid var(--themes-main-color);
+  outline-offset: -2px;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  z-index: -1;
+}
+
+.card__icon-button:focus-within::before {
+  opacity: 100;
+  z-index: 0;
+}
+
+.card__like-button {
+  width: 130px;
+  min-height: 38px;
+  padding: 9px 17px;
+}
+
+/* btn */
+
+.button__container {
+  background: var(--themes-backgroud-color);
+}
+
+.button {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 2px solid var(--themes-main-color);
+  background: var(--themes-backgroud-color);
+  transition: box-shadow 0.3s ease;
+  cursor: pointer;
+}
+
+.footer__button {
+  gap: 8px;
+  min-height: 55px;
+  padding: 15px 20px;
+}
+
+.button:focus-visible {
+  box-shadow: 2px 2px var(--themes-main-color);
+  outline: none;
+}
+
+.button::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0%;
+  height: 100%;
+  background-color: var(--themes-main-color);
+  transition: width 0.5s ease-in-out;
+}
+
+.button:hover::before {
+  width: 100%;
+}
+
+.button__text {
+  font-family: var(--font-accent);
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 90%;
+  color: var(--themes-button-text-color);
+}
+
+.button .button__text {
+  transition: color 0.5s ease-in-out;
+}
+
+.button:hover .button__text {
+  color: var(--themes-backgroud-color);
+}
+
+.button svg {
+  transition: color 0.5s ease-in-out;
+}
+
+.button:hover svg {
+  color: var(--themes-backgroud-color);
+}
+
+@supports (mix-blend-mode: difference) {
+  .button .button__text {
+    transition: none;
+  }
+
+  .button svg {
+    transition: none;
+    mix-blend-mode: difference;
+  }
+
+  .button:hover .button__text {
+    color: var(--themes-button-text-color);
+  }
+
+  .button:hover svg {
+    color: var(--themes-button-text-color);
+  }
+
+  .button__text {
+    mix-blend-mode: difference;
+  }
+}
+
+/* dialog */
+dialog::backdrop {
+  opacity: 0.75;
+  background: var(--themes-main-color, #000);
+}
+
+.dialog {
+  width: calc(100vw * (352 / 1440));
+  min-width: 341px;
+  border: 2px solid var(--themes-main-color);
+  padding: 30px;
+  background: var(--themes-backgroud-color);
+}
+
+.dialog__container {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  color: var(--themes-main-color);
+}
+
+.dialog__warning {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  font-family: var(--font-accent);
+  font-size: 14px;
+  line-height: 150%;
+  text-transform: uppercase;
+}
+
+.dialog__button {
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  min-height: 38px;
+  padding: 9px 17px;
+}
+
+/* filters */
+.image_brightness {
+  filter: brightness(130%);
+}
+
+.image_contrast {
+  filter: contrast(150%);
+}
+
+.image_blur {
+  filter: blur(0.3rem);
+}
+
+.image_opacity {
+  filter: opacity(0.8);
+}
+
+.image_grayscale {
+  filter: grayscale(0.8);
+}
+
+.image_saturate {
+  filter: saturate(158%);
+}
+
+.image_sepia {
+  filter: sepia(80%);
+}
+
+.image_combinate {
+  filter: contrast(200%) blur(0.15rem);
+}
+
+@media (width <= 450px) {
+  .page {
+    width: 100%;
+    min-width: 320px;
+  }
+
+  .footer__button {
+    flex-direction: column;
+  }
+
+  .footer__button svg {
+    width: 28px;
+    height: 28px;
+  }
+
+  .dialog {
+    padding: 30px 40px;
+  }
+}
